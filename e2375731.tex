@@ -1,0 +1,486 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{float}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[dvips]{graphicx}
+%\usepackage{a4wide}
+\usepackage{epsfig}
+\usepackage{fancybox}
+\usepackage{verbatim}
+\usepackage{array}
+\usepackage{latexsym}
+\usepackage{alltt}
+\usepackage{amssymb}
+\usepackage{amsmath,amsthm}
+\usepackage{bm}
+\usepackage{wasysym}
+
+%\usepackage{fullpage}
+%\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage[hmargin=2cm,vmargin=3.0cm]{geometry}
+%\topmargin=0cm
+%\topmargin=-1.8cm
+%\addtolength{\textheight}{6.5cm}
+%\addtolength{\textwidth}{2.0cm}
+%\setlength{\leftmargin}{-3cm}
+%\setlength{\oddsidemargin}{0.0cm}
+%\setlength{\evensidemargin}{0.0cm}
+
+%misc libraries goes here
+\usepackage{tikz}
+\usepackage{tikz-qtree}
+\usetikzlibrary{automata,positioning}
+
+\usepackage{multicol}
+\usepackage{enumitem}
+
+\usepackage[most]{tcolorbox}
+
+\usepackage[colorlinks=true,urlcolor=black,linkcolor=black]{hyperref}
+
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+
+\lstdefinestyle{customtex}{
+    %backgroundcolor=\color{lbcolor},
+    tabsize=2,
+    language=TeX,
+    numbers=none,
+    basicstyle=\footnotesize\ttfamily,
+    numberstyle=\footnotesize,
+    aboveskip={0.0\baselineskip},
+    belowskip={0.0\baselineskip},
+    %
+    columns=flexible,
+    keepspaces=true,
+    fontadjust=true,
+    upquote=true,
+    %
+    breaklines=true,
+    prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+    frame=single,
+    showtabs=false,
+    showspaces=false,
+    showstringspaces=false,
+    %
+    %identifierstyle=\color[rgb]{0,0.2,0.8},
+    identifierstyle=\color[rgb]{0,0,0.5},
+    %identifierstyle=\color[rgb]{0.133,0.545,0.133},
+    %keywordstyle=\color[rgb]{0.8,0,0},
+    %keywordstyle=\color[rgb]{0.133,0.545,0.133},
+    keywordstyle=\color[rgb]{0,0,0.5},
+    %commentstyle=\color[rgb]{0.133,0.545,0.133},
+    commentstyle=\color[rgb]{0.545,0.545,0.545},
+    %stringstyle=\color[rgb]{0.827,0.627,0.133},
+    stringstyle=\color[rgb]{0.133,0.545,0.133},
+    %
+    literate={â}{{\^{a}}}1 {Â}{{\^{A}}}1 {ç}{{\c{c}}}1 {Ç}{{\c{C}}}1 {ğ}{{\u{g}}}1 {Ğ}{{\u{G}}}1 {ı}{{\i}}1 {İ}{{\.{I}}}1   {ö}{{\"o}}1 {Ö}{{\"O}}1 {ş}{{\c{s}}}1 {Ş}{{\c{S}}}1 {ü}{{\"u}}1 {Ü}{{\"U}}1 {~}{$\sim$}{1}
+}
+
+\lstdefinestyle{output}{
+    %backgroundcolor=\color{lbcolor},
+    tabsize=2,
+    numbers=none,
+    basicstyle=\footnotesize\ttfamily,
+    numberstyle=\footnotesize,
+    aboveskip={0.0\baselineskip},
+    belowskip={0.0\baselineskip},
+    %
+    columns=flexible,
+    keepspaces=true,
+    fontadjust=true,
+    upquote=true,
+    %
+    breaklines=true,
+    prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+    frame=single,
+    showtabs=false,
+    showspaces=false,
+    showstringspaces=false,
+    %
+    %identifierstyle=\color[rgb]{0.44,0.12,0.1},
+    identifierstyle=\color[rgb]{0,0,0},
+    keywordstyle=\color[rgb]{0,0,0},
+    commentstyle=\color[rgb]{0,0,0},
+    stringstyle=\color[rgb]{0,0,0},
+    %
+    literate={â}{{\^{a}}}1 {Â}{{\^{A}}}1 {ç}{{\c{c}}}1 {Ç}{{\c{C}}}1 {ğ}{{\u{g}}}1 {Ğ}{{\u{G}}}1 {ı}{{\i}}1 {İ}{{\.{I}}}1   {ö}{{\"o}}1 {Ö}{{\"O}}1 {ş}{{\c{s}}}1 {Ş}{{\c{S}}}1 {ü}{{\"u}}1 {Ü}{{\"U}}1
+}
+
+\lstset{style=customtex}
+
+
+\tikzset{%
+    terminal/.style={draw, rectangle,
+    				 align=center, 
+					 minimum height=1cm, 
+					 minimum width=2cm,
+					 fill=black!10,
+					 anchor=mid},
+    nonterminal/.style={draw, rectangle,
+    					align=left,
+					    minimum height=1cm, 
+						minimum width=2cm, 
+						anchor=mid},% and so on
+}
+
+%% Style for terminals
+%\tikzstyle{terminal}=[draw, rectangle, 
+%					  minimum height=1cm, 
+%					  minimum width=2cm, 
+%					  fill=black!20,
+%					  anchor=south west]
+%% Style for nonterminals
+%\tikzstyle{nonterminal}=[draw, rectangle, 
+%						 minimum height=1 cm, 
+%						 minimum width=2 cm, 
+%						 anchor=north east]
+
+
+\newcommand{\HRule}{\rule{\linewidth}{1mm}}
+\newcommand{\kutu}[2]{\framebox[#1mm]{\rule[-2mm]{0mm}{#2mm}}}
+\newcommand{\gap}{ \\[1mm] }
+
+\newcommand{\Q}{\raisebox{1.7pt}{$\scriptstyle\bigcirc$}}
+\newcommand{\minus}{\scalebox{0.35}[1.0]{$-$}}
+
+\setlength{\fboxsep}{10pt}
+
+\tcbsetforeverylayer{enhanced jigsaw, breakable, arc=0mm, boxrule=1pt, boxsep=5pt, after=\vspace{1em}, colback=white, colframe=black}
+
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+
+\setlength\parindent{0pt}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+%\renewcommand\arraystretch{1.2}
+
+\newenvironment{Tab}[1]
+  {\def\arraystretch{1}\tabular{#1}}
+  {\endtabular}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Discrete Computational Structures \\ Take Home Exam 1}
+\author{EMRE SAHIN \\ 2375731} % write your name and id
+\date{} % do not write any date
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\HRule\\
+Middle East Technical University \hfill Department of Computer Engineering
+{\let\newpage\relax\maketitle}
+\HRule\\
+\vspace{1cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Write your answers below the section tags
+\section*{Question 1 \hfill \normalfont{(7 pts)}}
+
+\tab \textbf{a)} Construct a truth table for the following compound proposition.
+\begin{equation*}
+    (q \rightarrow \neg p)\leftrightarrow (p \leftrightarrow \neg q)
+\end{equation*} 
+\hfill \small{(3.5/7 pts)} \\
+\begin{tcolorbox}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c||c|c|c|c|c|c|c|}
+\hline
+&$p$ &$q$ &$\neg p$ &$\neg q$ &$q\rightarrow  \neg p$ &$p \iff \neg q $  &$(q \rightarrow   \neg p) \iff (p \iff \neg q ) $ \\ \hline
+&$1$&$0$ &$0$ &$1$  &$1$ &$1$  &$1$ \\ \hline
+&$1$&$1$ &$0$ &$0$  &$0$ &$0$  &$1$ \\ \hline
+&$0$&$0$ &$1$ &$1$  &$1$ &$0$  &$0$ \\ \hline
+&$0$&$1$ &$1$ &$0$  &$1$ &$1$  &$1$ \\ \hline
+    \end{tabular}
+    \label{tab:my_labelQ1_p1}
+\end{table}
+
+\end{tcolorbox}
+
+\tab \textbf{b)} Show that whether the following conditional statement is a tautology by using a truth table.
+\begin{equation*}
+    [(p \vee q) \wedge (r \rightarrow p) \wedge (r \rightarrow q)] \rightarrow r
+\end{equation*}
+\hfill \small{(3.5/7 pts)}\\
+
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c||c|c|c|c|c|c|c|c|}
+\hline
+&$p$ &$q$ &$r$ &$p \vee q$ &$ r \rightarrow  p$&$ r \rightarrow  q$ &$(p \vee q) \wedge(r \rightarrow  p) \wedge(r \rightarrow  q) $  &$((p \vee q) \wedge(r \rightarrow s p) \wedge(r \rightarrow  q) )\rightarrow r$ \\ \hline
+&$1$ &$1$ &$1$ &$1$  &$1$ &$1$  &$1$ &$1$\\ \hline
+&$1$ &$1$ &$0$ &$1$  &$1$ &$1$  &$1$ &$0$\\ \hline
+&$1$ &$0$ &$1$ &$1$  &$1$ &$0$  &$0$ &$1$\\ \hline
+&$1$ &$0$ &$0$ &$1$  &$1$ &$1$  &$1$ &$0$\\ \hline
+&$0$ &$1$ &$1$ &$1$  &$0$ &$1$  &$0$ &$1$\\ \hline
+&$0$ &$1$ &$0$ &$1$  &$1$ &$1$  &$1$ &$0$\\ \hline
+&$0$ &$0$ &$1$ &$0$  &$0$ &$0$  &$0$ &$1$\\ \hline
+&$0$ &$0$ &$0$ &$0$  &$1$ &$1$  &$0$ &$1$\\ \hline
+    \end{tabular}
+    \begin{center}
+    $((p \vee q) \wedge(r \rightarrow s p) \wedge(r \rightarrow  q) )\rightarrow r$  is not tautology since there are False cases.
+\end{center}
+    \label{tab:my_labelQ1_p2}
+\end{table}
+
+
+
+
+
+
+\newpage
+\section*{Question 2 \hfill \normalfont{(8 pts)}}
+\tab Show that $(p \rightarrow q) \wedge (p \rightarrow r)$ and $(\neg q \vee \neg r)\rightarrow \neg p$ are logically equivalent. Use tables 6,7 and 8 given under the section "$\textit{Propositional Equivalences}$" in the course textbook and give the reference to the table and the law in each step.
+
+\begin{tcolorbox}
+
+$ \equiv (p\rightarrow q)\wedge(p\rightarrow r) \equiv (\neg q \vee \neg r)\rightarrow \neg q$ \,\,\,\,\,  \\
+    $ \equiv (p\rightarrow q)\wedge(p\rightarrow r) $ \,\,\,\,\,\,\,\,         \\
+    $ \equiv p \rightarrow (q \wedge r) $ \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,By Table 7, equation(row) 6        \\
+    $ \equiv \neg(q\wedge r)\rightarrow \neg p $ \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,By Table 7, equation(row) 2  \\
+    $ \equiv (\neg q \vee \neg r)\rightarrow \neg q $ \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,By the table 6, equation(row) 8 \\
+
+
+
+
+\end{tcolorbox}
+
+\section*{Question 3 \hfill \normalfont{(30 pts, 2.5 pts each)}}
+\tab Let F(x, y) mean that x is the father of y; M(x, y) denotes x is the mother of y. Similarly,
+H(x, y), S(x, y), and B(x, y) say that x is the husband/sister/brother of y, respectively. You
+may also use constants to denote individuals, like Sam and Alex. You can use $\vee, \wedge, \rightarrow, \neg, \forall, \exists$ rules and quantifiers. However, you are not allowed
+to use any predicate symbols other than the above to translate the following sentences into
+predicate logic. $\exists$! and exclusive-or (XOR) quantifiers are forbidden:
+\begin{multicols}{2}
+\begin{enumerate}[label=\textbf{\arabic*})]
+\item Everybody has a mother.
+\item Everybody has a father and a mother.
+\item Whoever has a mother has a father.
+\item Sam is a grandfather.
+\item All fathers are parents.
+\item All husbands are spouses.
+\item No uncle is an aunt.
+\item All brothers are siblings.
+\item Nobody's grandmother is anybody's father.
+\item Alex is Ali's brother-in-law.
+\item Alex has at least two children.
+\item Everybody has at most one mother.
+\end{enumerate}
+\end{multicols}
+\begin{tcolorbox}
+
+
+\subsection{1)}
+\begin{center}
+    $\forall_y \exists_x M(x,y) $ 
+\end{center}
+\subsection{2)}
+\begin{center}
+    $\forall_y \exists_x \exists_z [\, F(x,y)\wedge M(z,y)\,] $ 
+\end{center}
+\subsection{3)}
+\begin{center}
+    $\forall_y \exists_x \exists_z [\, M(x,y)\rightarrow F(z,y)\,] $ 
+\end{center}
+\newpage
+\subsection{4)}
+\begin{center}
+    $\exists_x \exists_y [\, F(Sam,x)\wedge (M(x,y) \vee  F(x,y))\,] $ 
+\end{center}
+\subsection{5)}
+\begin{center}
+    $\,\forall_x \exists_y \exists_z [\, F(x,y)\rightarrow (\, M(z,y) \vee F(x,y) \,) \,] $ 
+\end{center}
+\subsection{6)}
+\begin{center}
+    $\,\forall_y \exists_x[\,H(x,y) \rightarrow ( H(y,x)\vee H(x,y) )     \,] $ 
+\end{center}
+\subsection{7)}
+\begin{center}
+    $\,\forall_a (\exists_y \exists_x(B(a,x) \wedge (M(x,y) \vee F(x,y))) \rightarrow \neg \exists_y \exists_x(S(a,x) \wedge (M(x,y) \vee F(x,y)))) $
+\end{center}
+\subsection{8)}
+\begin{center}
+    $\,\forall_x \exists_y \exists_z [\, B(x,y)\rightarrow(F(z,y) \wedge F(z,x)) \vee(M(z,y) \wedge M(z,x))  \,] $ 
+\end{center}
+\subsection{9)}
+\begin{center}
+    $\,\forall_x \forall_t( \exists_y[\,( M(y,x) \vee F(y,x)) \wedge M(t,y)\,] \rightarrow \forall_z(\neg F(t,z))) $ 
+\end{center}
+\subsection{10)}
+\begin{center}
+    $\,\exists_x[\,H(Ali,x) \wedge (B(Alex,x) \vee S(Alex,x) )   \,]  $ 
+\end{center}
+\subsection{11)}
+\begin{center}
+    $\,\exists_a \exists_b [\,(( F(Alex,a) \wedge F(Alex,b))\vee ( M(Alex,a) \wedge M(Alex,b) )) \wedge \neg(a=b)\,] $ 
+\end{center}
+\subsection{12)}
+\begin{center}
+    $\,\forall_z \exists_x  [\, M(x,z)   \wedge \forall_y( M(y,z)\rightarrow (y=x))  \,] $ 
+\end{center}
+
+
+\end{tcolorbox}
+
+
+\newpage
+\section*{Question 4 \hfill \normalfont{(25 pts)}}
+\tab Prove the following claim by natural deduction. Use only the natural deduction rules $\vee$, $\wedge$, $\rightarrow$, $\neg$ introduction and elimination. If you attempt to make use of a lemma or equivalence, you need to prove it by natural deduction too.
+\begin{equation*}
+    \textbf{a)} \; p \rightarrow q, r \rightarrow s \vdash (p \vee r) \rightarrow (q \vee s)
+\end{equation*}
+\hfill \small{(12.5/25 pts)}\\
+\begin{tcolorbox}
+
+\begin{center}
+1:)\, $p \rightarrow q $\,\,\,\,\,\,\,\,\, Premise \\
+2:)\, $r \rightarrow s $\,\,\,\,\,\,\,\,\, Premise  \\
+\begin{tcolorbox}
+\begin{center}
+    3:)\, $p \vee r $\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, Assume \\
+    \begin{tcolorbox}
+    \begin{center}
+        4:)\, $p  $\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, Assume \\
+        5:)\, $q  $\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, (1,4), $\rightarrow $ elimination \\
+        6:)\, $q \vee s$\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, (5), $\vee $ introduction \\
+    \end{center}
+    \end{tcolorbox}
+    \begin{tcolorbox}
+    \begin{center}
+        7:)\, $r  $\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, Assume \\
+        8:)\, $s  $\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, (2,7), $\rightarrow $ elimination \\
+        9:)\, $q \vee s$\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, (8), $\vee $ introduction \\
+    \end{center}
+    \end{tcolorbox}
+    10:)\, $q \vee s$\,\,\,\,\,\,\,\,\, (3,4-6,7-9), $\vee $ elimination \\
+\end{center}
+\end{tcolorbox}
+11:)\, $(p \vee r )\rightarrow(q \vee s)$\,\,\,\,\,\,\,\,\, (3,4-6,7-9), $\vee $ elimination \\
+\end{center}
+
+\end{tcolorbox}
+\newpage
+\begin{equation*}
+     \textbf{b)} \;  (p \rightarrow (r \rightarrow \neg q)) \rightarrow ((p \wedge q) \rightarrow \neg r)
+\end{equation*}
+
+\hfill \small{(12.5/25 pts)}\\
+\begin{tcolorbox}
+
+\begin{center}
+1:)\, $(p \rightarrow (r \rightarrow \neg q))\rightarrow (( p \wedge q) \rightarrow \neg r ) $ \\
+\begin{tcolorbox}
+\begin{center}
+2:)\, $(p \rightarrow (r \rightarrow \neg q)) $  \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, Assumption
+\begin{tcolorbox}
+\begin{center}
+    3:)\, $(p \wedge q ) $  \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, Assumption\\
+    4:)\, $p   $  \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,  (3), $\wedge $ elimination \\
+    5:)\, $q   $  \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,  (3), $\wedge $ elimination\\ 
+    6:)\, $e \rightarrow \neg q   $  \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,  (2,4), $\rightarrow $ elimination \\
+    7:)\, $ \neg r   $  \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,  (6,5),  MT \\
+\end{center}
+\end{tcolorbox}
+8:)\, $(p \wedge q)\rightarrow \neg r  $  \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,  (3,7), $\rightarrow $ introduction 
+\end{center}
+\end{tcolorbox}
+9:)\, $(p \rightarrow (r \rightarrow \neg q))\rightarrow(p \wedge q)\rightarrow \neg r  $  \,\,\,\,\,\,\,\,\,  (2,8), $\rightarrow $ introduction  \\
+
+\vspace{2cm}
+1:)\, $ p \rightarrow q , \neg q  \vdash \neg p $\,\,\,\,\,\,\,\,\, MT PROOF\\
+2:)\, $ p \rightarrow q  $\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, Premise\\
+3:)\, $ \neg q  $\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, Premise\\
+\begin{tcolorbox}
+\begin{center}
+    4:)\, $ p $\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, Assumption\\
+    5:)\, $  q  $\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, (2,4) $\rightarrow $ elimination\\
+    6:)\, $ \bot   $\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, $\bot$ from (3,5)\\
+\end{center}
+\end{tcolorbox}
+7:)\, $p   $\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, $\neg $ introduction from (4-6)\\
+\end{center}
+
+\end{tcolorbox}
+\newpage
+\section*{Question 5 \hfill \normalfont{(30 pts)}}
+\tab Prove the following claim by natural deduction. Use only the natural deduction rules $\vee$, $\wedge$, $\rightarrow$, $\neg$ introduction and elimination. If you attempt to make use of a lemma or equivalence, you need to prove it by natural deduction too.
+
+
+\begin{equation*}
+    \textbf{a)} \; \forall x P(x) \vee \forall x Q(x) \vdash \forall x (P(x) \vee Q(x)) 
+\end{equation*}
+
+\hfill \small{(12.5/25 pts)}\\
+\begin{tcolorbox}
+\begin{center}
+1:)\, $\forall_x P(x) \vee \forall_x Q(x)  $\,\,\,\,\,\,\,\,\, Premise
+\begin{tcolorbox}
+\begin{center}
+ 2:)\, $\forall_x P(x)  $\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, Assumption \\
+    \begin{tcolorbox}
+    \begin{center}
+    $x_0$ arbitrary fresh variable \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, \\
+    3:)\, $P(x_0) $        \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, (2), $\forall_x$ elimination   \\
+    4:)\, $ P(x_0) \vee Q(x_0)  $ \,\,\,\,\,\,\,\, (3), $\vee $ introduction \\
+    \end{center}
+    \end{tcolorbox}
+    5:)\, $\forall_x( P(x) \vee Q(x))  $\,\,\,\,\,\,\,\,\,\, (3-4), $\forall_x$ introduction  \\
+\end{center}
+\end{tcolorbox}
+\begin{tcolorbox}
+\begin{center}
+ 6:)\, $\forall_x Q(x)  $\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, Assumption
+    \begin{tcolorbox}
+    \begin{center}
+    $x_0$ arbitrary fresh variable \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, \\
+    7:)\, $Q(x_0) $   \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,  (6), $\forall_x$ elimination   \\
+    8:)\, $ P(x_0) \vee Q(x_0)  $ \,\,\,\,\,\,\,\, (7), $\vee $ introduction \\
+    \end{center}
+    \end{tcolorbox}
+    9:)\, $\forall_x( P(x) \vee Q(x))  $\,\,\,\,\,\,\,\,\,\, (7-8), $\forall_x$ introduction  \\
+\end{center}
+\end{tcolorbox}
+10:)\, $\forall_x( P(x) \vee Q(x))  $\,\,\,\,\,\,\,\,\,\, (1,2-5,6-9), $\vee_x$ elimination  \\
+\end{center}
+
+\end{tcolorbox}
+\newpage
+\begin{equation*}
+    \textbf{b)} \; \forall x P(x) \rightarrow S \vdash \exists x (P(x)\rightarrow S)\\
+\end{equation*}
+
+\hfill \small{(17.5/25 pts)}\\
+\begin{tcolorbox}\begin{center}
+1:)\, $\forall_x P(x) \rightarrow S  $\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,  Premise
+\begin{tcolorbox}
+\begin{center}
+    2:)\, $\forall_x P(x)   $\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, \,\,\,\,\,\,       Assumption\\
+    \begin{tcolorbox}
+    \begin{center}
+    $x_0$ arbitrary fresh variable \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, \\
+    3:)\, $ P(x_o)\rightarrow S   $\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,    (2), $\forall_x$ elimination   \\
+    4:)\, $ P(x_o)   $\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,   (1), $\forall_x$ elimination   \\
+    5:)\, $ S$\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, (3,4), $\rightarrow $ elimination \\
+    \end{center}
+    \end{tcolorbox}
+    6:)\, $ P(x_o) \rightarrow S   $\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,   (3,5), $\rightarrow $ introduction \\
+\end{center}
+\end{tcolorbox}
+7:)\, $\exists P(x) \rightarrow S $   \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,  (6), $\exists_x $ introduction \\
+\end{center}
+\end{tcolorbox}
+
+\end{document}
